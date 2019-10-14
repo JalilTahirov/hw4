@@ -81,7 +81,7 @@ function ArrayList(){
     return resultArray;
   }
 
-  this.splice = (start, deleteCount, elements) => {
+  this.splice = (start, deleteCount, ...elements) => {
     if(typeof start === 'undefined'){
      return [];
     }
@@ -107,17 +107,22 @@ function ArrayList(){
         j++;
       }
     }
-
-    let withDeletedArray = [];
-    let n = 0;
-    for(let index = 0; index < updatedArray.length; index++){
-      if(index < start || index >= endIndex){
-        withDeletedArray[n] = updatedArray[index];
+    if(typeof elements !== 'undefined' && elements.length>0){
+      let withAddedArray = [];
+      let n = 0;
+      for(let index = 0; index < start; index++){     
+        withAddedArray[n] = updatedArray[index];
         n++;
       }
-      if(index === start+1){
-        
+      for(let index = 0; index < elements.length; index++){
+        withAddedArray[n] = elements[index];
+        n++;
       }
+      for(let index = start; index < updatedArray.length; index++){     
+       withAddedArray[n] = updatedArray[index];
+       n++;
+      }
+      updatedArray = withAddedArray;
     }
     
     size = updatedArray.length;

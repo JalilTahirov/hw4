@@ -380,7 +380,7 @@ describe('splice(start, deleteCount, ...newElements)', () => {
 
         const expectedResult = [-5, 66, 6];
         const expectedSize = 7;
-        const expectedToString =  "[3, 4, 101, 102, 103, 8, 10]";
+        const expectedToString =  "[3,4,101,102,103,8,10]";
         //when
         const actualResult = sut.splice(start, deleteCount,elementOne,elementTwo,elementThree);
         const actualSize = sut.getSize();
