@@ -32,9 +32,11 @@ function ArrayList(){
 
     return size;
   }
+
   this.pop = () => {
     return currentArray[size-1];
   }
+
   this.unshift = (number) => {
     if(typeof number === 'undefined') return size;
     size++;
@@ -80,20 +82,47 @@ function ArrayList(){
   }
 
   this.splice = (start, deleteCount, elements) => {
-    let resultArray = []; 
+    if(typeof start === 'undefined'){
+     return [];
+    }
+
+    if(typeof deleteCount === 'undefined'){
+      deleteCount = size-start;
+    }
+
+    let endIndex = start + deleteCount;
     let tempFullArray = currentArray
     tempFullArray.length = size;
-    if(typeof start === 'undefined' || start < 0){
-      resultArray = tempFullArray;
-      return resultArray;
+    
+    let deletedArray = [];
+    let updatedArray = [];    
+    let i = 0;
+    let j = 0;
+    for(let index = 0; index<tempFullArray.length; index++){
+      if(index < start || index >= endIndex){
+        updatedArray[i] = tempFullArray[index];
+        i++;
+      } else {
+        deletedArray[j] = tempFullArray[index];
+        j++;
+      }
     }
-    if(typeof end === 'undefined' || end >= size){
-      end = size;
-    }    
-    for (let j = start, i = 0; j<end; j++, i++) {
-        resultArray[i] = currentArray[j];
-    }
-    return resultArray;
-  }
 
+    let withDeletedArray = [];
+    let n = 0;
+    for(let index = 0; index < updatedArray.length; index++){
+      if(index < start || index >= endIndex){
+        withDeletedArray[n] = updatedArray[index];
+        n++;
+      }
+      if(index === start+1){
+        
+      }
+    }
+    
+    size = updatedArray.length;
+    currentArray = updatedArray;
+    currentArray.length = size*2;
+    return deletedArray;
+  }
 }

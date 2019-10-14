@@ -318,46 +318,79 @@ describe('splice(start, deleteCount, ...newElements)', () => {
         //then
         assert.deepEqual(actual, expected);
         assert.equal(actualSize, expectedSize);
-    });    
+    }); 
 
-    it('should return current arrayList if no elements ()', () => {
-        //given
-        const array = [1,2,3,4,5];
-        const sut = new ArrayList();  
-        sut.init(array);       
-        const expected =  array;  
-        //when
-        const actual = sut.slice();
-        //then
-        assert.deepEqual(actual, expected);
-    });
-
-    it('should return only arrayList elements starting from 2nd till end (2)', () => {
-        //given
-        const array = [1,2,3,4,5,6];
-        const sut = new ArrayList(); 
-        const start = 2; 
-        sut.init(array);       
-        expected =  [3,4,5,6];  
-        //when
-        const actual = sut.slice(start);
-        //then
-        assert.deepEqual(actual, expected);
-    });
-
-    it('should return arrayList elements starting from 2nd till end (2,100)', () => {
-        //given
-        const array = [1,2,3,4,5,6];
+    it('should return and delete [-5,66,6б,8,10] from [3,4,-5,66,6,8,10]  (2)', () => {
+        //given        
+        const array = [3, 4, -5, 66, 6, 8, 10];
         const start = 2;
-        const end = 100;
         const sut = new ArrayList();  
-        sut.init(array);       
-        expected =  [3,4,5,6];  
+        sut.init(array); 
+        const expected = [-5, 66, 6, 8, 10];
+        const expectedSize = 2;  
         //when
-        const actual = sut.slice(start, end);
+        const actual = sut.splice(start);
+        const actualSize = sut.getSize();
         //then
         assert.deepEqual(actual, expected);
-    });
+        assert.equal(actualSize, expectedSize);
+    }); 
+
+    it('should return and delete [] from [3,4,-5,66,6,8,10]  (2)', () => {
+        //given        
+        const array = [3, 4, -5, 66, 6, 8, 10];
+        const start = 2;
+        const sut = new ArrayList();  
+        sut.init(array); 
+        const expected = [-5, 66, 6, 8, 10];
+        const expectedSize = 2;  
+        //when
+        const actual = sut.splice(start);
+        const actualSize = sut.getSize();
+        //then
+        assert.deepEqual(actual, expected);
+        assert.equal(actualSize, expectedSize);
+    }); 
+
+    it('should return  [] and delete nothing from [3,4,-5,66,6,8,10]  ()', () => {
+        //given        
+        const array = [3, 4, -5, 66, 6, 8, 10];      
+        const sut = new ArrayList();  
+        sut.init(array); 
+        const expected = [];
+        const expectedSize = 7;  
+        //when
+        const actual = sut.splice();
+        const actualSize = sut.getSize();
+        //then
+        assert.deepEqual(actual, expected);
+        assert.equal(actualSize, expectedSize);
+    }); 
+
+    it('should return and delete [-5,66,6] from [3,4,-5,66,6,8,10] and also add three more elements in parameters  (2, 3, 101, 102, 103)', () => {
+        //given        
+        const array = [3, 4, -5, 66, 6, 8, 10];
+        const start = 2;
+        const deleteCount = 3;
+        const sut = new ArrayList();  
+        sut.init(array); 
+        const elementOne = 101;
+        const elementTwo = 102;
+        const elementThree = 103;
+
+        const expectedResult = [-5, 66, 6];
+        const expectedSize = 7;
+        const expectedToString =  "[3, 4, 101, 102, 103, 8, 10]";
+        //when
+        const actualResult = sut.splice(start, deleteCount,elementOne,elementTwo,elementThree);
+        const actualSize = sut.getSize();
+        const actualToString = sut.toString();
+        //then
+        assert.deepEqual(actualResult, expectedResult);
+        assert.equal(actualSize, expectedSize);
+        assert.equal(actualToString, expectedToString);
+    }); 
+
 });
 //sort(function(first, seconod) returns nothing (сортирует массив на месте);
 
