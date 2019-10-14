@@ -302,7 +302,63 @@ describe('slice(start, end)', () => {
 });
 
 //splice(start, numberToSplice, ...newElements) returns array of deleted elements or empty array.
+describe('splice(start, deleteCount, ...newElements)', () => {
+    it('should return and delete [-5,66,6] from [3,4,-5,66,6,8,10]  (2, 3)', () => {
+        //given        
+        const array = [3, 4, -5, 66, 6, 8, 10];
+        const start = 2;
+        const deleteCount = 3;
+        const sut = new ArrayList();  
+        sut.init(array); 
+        const expected = [-5, 66, 6];
+        const expectedSize = 4;  
+        //when
+        const actual = sut.splice(start, deleteCount);
+        const actualSize = sut.getSize();
+        //then
+        assert.deepEqual(actual, expected);
+        assert.equal(actualSize, expectedSize);
+    });    
 
+    it('should return current arrayList if no elements ()', () => {
+        //given
+        const array = [1,2,3,4,5];
+        const sut = new ArrayList();  
+        sut.init(array);       
+        const expected =  array;  
+        //when
+        const actual = sut.slice();
+        //then
+        assert.deepEqual(actual, expected);
+    });
+
+    it('should return only arrayList elements starting from 2nd till end (2)', () => {
+        //given
+        const array = [1,2,3,4,5,6];
+        const sut = new ArrayList(); 
+        const start = 2; 
+        sut.init(array);       
+        expected =  [3,4,5,6];  
+        //when
+        const actual = sut.slice(start);
+        //then
+        assert.deepEqual(actual, expected);
+    });
+
+    it('should return arrayList elements starting from 2nd till end (2,100)', () => {
+        //given
+        const array = [1,2,3,4,5,6];
+        const start = 2;
+        const end = 100;
+        const sut = new ArrayList();  
+        sut.init(array);       
+        expected =  [3,4,5,6];  
+        //when
+        const actual = sut.slice(start, end);
+        //then
+        assert.deepEqual(actual, expected);
+    });
+});
 //sort(function(first, seconod) returns nothing (сортирует массив на месте);
 
 // get(index) returns element in ArrayLIst by index;

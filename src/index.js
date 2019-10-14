@@ -79,7 +79,7 @@ function ArrayList(){
     return resultArray;
   }
 
-  this.splice = (start, end) => {
+  this.splice = (start, deleteCount, elements) => {
     let resultArray = []; 
     let tempFullArray = currentArray
     tempFullArray.length = size;
