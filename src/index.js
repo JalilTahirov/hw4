@@ -49,6 +49,7 @@ function ArrayList(){
     currentArray.length = size * 2;
     return size;
   }
+
   this.shift = () => {
     let result = currentArray[0];
 
@@ -60,4 +61,39 @@ function ArrayList(){
     currentArray = tempArray;
     return result;
   }
+
+  this.slice = (start, end) => {
+    let resultArray = []; 
+    let tempFullArray = currentArray
+    tempFullArray.length = size;
+    if(typeof start === 'undefined' || start < 0){
+      resultArray = tempFullArray;
+      return resultArray;
+    }
+    if(typeof end === 'undefined' || end >= size){
+      end = size;
+    }    
+    for (let j = start, i = 0; j<end; j++, i++) {
+        resultArray[i] = currentArray[j];
+    }
+    return resultArray;
+  }
+
+  this.splice = (start, end) => {
+    let resultArray = []; 
+    let tempFullArray = currentArray
+    tempFullArray.length = size;
+    if(typeof start === 'undefined' || start < 0){
+      resultArray = tempFullArray;
+      return resultArray;
+    }
+    if(typeof end === 'undefined' || end >= size){
+      end = size;
+    }    
+    for (let j = start, i = 0; j<end; j++, i++) {
+        resultArray[i] = currentArray[j];
+    }
+    return resultArray;
+  }
+
 }

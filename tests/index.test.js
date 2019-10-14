@@ -99,7 +99,6 @@ describe('toString()', () => {
     });
 });
 
-
 describe('toArray()', () => {
     it('should return array of ArrayList elements ()', () => {
         //given        
@@ -114,8 +113,7 @@ describe('toArray()', () => {
     });    
 });
 
-// push(number) returns new size of ArrayList. 
-//Принимает в качестве аргумента число или undefined;
+// push(number) returns new size of ArrayList.
 describe('push(number)', () => {
     it('should return new size of ArrayList after adding (77)', () => {
         //given        
@@ -190,21 +188,23 @@ describe('unshift()', () => {
     it('should return new size of arrayList after adding (44)', () => {
         //given        
         const array = [3,4,-5,66];
-        const sut = new ArrayList();  
+        const sut = new ArrayList(); 
+        const number = 44;
         sut.init(array); 
         expected = 5;  
         //when
-        const actual = sut.unshift(44);
+        const actual = sut.unshift(number);
         //then
         assert.equal(actual, expected);
     });    
 
     it('should return 1 after adding to empty ArrayList (99)', () => {
         //given
-        const sut = new ArrayList();         
-        expected =  1;  
+        const sut = new ArrayList(); 
+        const number = 99;        
+        const expected =  1;  
         //when
-        const actual = sut.unshift(99);
+        const actual = sut.unshift(number);
         //then
         assert.equal(actual, expected);
     });  
@@ -212,7 +212,7 @@ describe('unshift()', () => {
     it('should return current size if no arguments passed ()', () => {
         //given
         const sut = new ArrayList();         
-        expected =  0;  
+        const expected =  0;  
         //when
         const actual = sut.unshift();
         //then
@@ -227,7 +227,7 @@ describe('shift()', () => {
         const array = [3,4,-5,66];
         const sut = new ArrayList();  
         sut.init(array); 
-        expected = 3;  
+        const expected = 3;  
         //when
         const actual = sut.shift();
         //then
@@ -237,7 +237,7 @@ describe('shift()', () => {
     it('should return undefined if no elements ()', () => {
         //given
         const sut = new ArrayList();         
-        expected =  undefined;  
+        const expected =  undefined;  
         //when
         const actual = sut.shift();
         //then
@@ -247,26 +247,64 @@ describe('shift()', () => {
 
 //slice(start, end) returns new array, containing elements from start (including) to end (excluding);
 describe('slice(start, end)', () => {
-    it('should return first element of the arrayList if any exists  ()', () => {
+    it('should return [-5,66,6] from [3,4,-5,66,6,8,10]  (2, 5)', () => {
         //given        
-        const array = [3,4,-5,66];
+        const array = [3, 4, -5, 66, 6, 8, 10];
+        const start = 2;
+        const end = 5;
         const sut = new ArrayList();  
         sut.init(array); 
-        expected = 3;  
+        const expected = [-5, 66, 6];  
         //when
-        const actual = sut.shift();
+        const actual = sut.slice(start, end);
         //then
-        assert.equal(actual, expected);
+        assert.deepEqual(actual, expected);
     });    
 
-    it('should return undefined if no elements ()', () => {
+    it('should return current arrayList if no elements ()', () => {
         //given
-        const sut = new ArrayList();         
-        expected =  undefined;  
+        const array = [1,2,3,4,5];
+        const sut = new ArrayList();  
+        sut.init(array);       
+        const expected =  array;  
         //when
-        const actual = sut.shift();
+        const actual = sut.slice();
         //then
-        assert.equal(actual, expected);
-    });                      
+        assert.deepEqual(actual, expected);
+    });
+
+    it('should return only arrayList elements starting from 2nd till end (2)', () => {
+        //given
+        const array = [1,2,3,4,5,6];
+        const sut = new ArrayList(); 
+        const start = 2; 
+        sut.init(array);       
+        expected =  [3,4,5,6];  
+        //when
+        const actual = sut.slice(start);
+        //then
+        assert.deepEqual(actual, expected);
+    });
+
+    it('should return arrayList elements starting from 2nd till end (2,100)', () => {
+        //given
+        const array = [1,2,3,4,5,6];
+        const start = 2;
+        const end = 100;
+        const sut = new ArrayList();  
+        sut.init(array);       
+        expected =  [3,4,5,6];  
+        //when
+        const actual = sut.slice(start, end);
+        //then
+        assert.deepEqual(actual, expected);
+    });
 });
 
+//splice(start, numberToSplice, ...newElements) returns array of deleted elements or empty array.
+
+//sort(function(first, seconod) returns nothing (сортирует массив на месте);
+
+// get(index) returns element in ArrayLIst by index;
+
+// set(index, value) changes element in ArrayLIst by index;
